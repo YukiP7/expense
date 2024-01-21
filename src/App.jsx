@@ -6,6 +6,7 @@ import Dashboard from './Dashboard/Dashboard.jsx';
 import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 import { login, signup } from './store/authSlice.js';
+import Transactions from './transcations/Transcation.jsx';
 
 function App() {
   const [loading, setLoading] = useState(true);

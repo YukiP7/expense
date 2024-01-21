@@ -39,8 +39,7 @@ const router = createBrowserRouter([
       {
         path : "/transcations" ,
         element: (
-          <AuthLayout authentication>
-            { " "}
+          <AuthLayout authentication = {true}>
               <Transcations />
           </AuthLayout>
       ),

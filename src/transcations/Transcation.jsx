@@ -9,17 +9,14 @@ const Transactions = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       const data = await dataService.getTranscations();
-      setTransactions(data);
+      setTransactions(data.documents || []); // Ensure transactions is an array
     };
 
     fetchTransactions();
   }, []);
 
   const handleSearch = () => {
-    if (searchDate.trim() === '') {
-      // If search date is empty, show all transactions
-      setFilteredTransactions([]);
-    } else {
+    if (Array.isArray(transactions)) {
       const filtered = transactions.filter(
         (transaction) => transaction.date === searchDate
       );
@@ -51,7 +48,7 @@ const Transactions = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredTransactions.length > 0
+          {Array.isArray(filteredTransactions) && filteredTransactions.length > 0
             ? filteredTransactions.map((transaction) => (
                 <tr key={transaction.$id}>
                   <td>{transaction.title}</td>
@@ -59,11 +56,12 @@ const Transactions = () => {
                   <td>{transaction.date}</td>
                 </tr>
               ))
-            : transactions.map((transaction) => (
+            : Array.isArray(transactions) &&
+              transactions.map((transaction) => (
                 <tr key={transaction.$id}>
                   <td>{transaction.title}</td>
                   <td>{transaction.price}</td>
-                  <td>{transaction.date}</td>
+                  <td>{(transaction.date)}</td>
                 </tr>
               ))}
         </tbody>
@@ -73,3 +71,4 @@ const Transactions = () => {
 };
 
 export default Transactions;
+
