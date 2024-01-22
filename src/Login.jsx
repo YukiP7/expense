@@ -36,7 +36,8 @@ const Login = () => {
   }
  
   return (
-      <div className="login">
+      <div className="loginLayout">
+        <div className="login">
       <h3>Login</h3>
       <div className="form">
         <form onSubmit={handleLogin}>
@@ -46,12 +47,13 @@ const Login = () => {
           <label>Password</label>
           <input type="password" required placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
           <br />
-       <Link to = '/Forgot'>Forgot</Link>
+       <Link to = '/Forgot' className='forpass'>Forgot Password</Link>
           <button className="submit" type="submit">
             Login
           </button>
           <span>Don't have an account?<Link to='/Signup'>Signup</Link></span>
         </form>
+      </div>
       </div>
       <ToastContainer/>
     </div>

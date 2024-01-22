@@ -34,21 +34,24 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
+    <div className="loginLayout">
+    < div className='login'>
+      <h3>Signup</h3>
       <form onSubmit={handleSignup}>
-        <label>Name:</label>
+      <div className="form">
+        <label>Name</label>
         <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
         <br />
-        <label>Email:</label>
+        <label>Email</label>
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         <br />
-        <label>Password:</label>
+        <label>Password</label>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <br />
-        <button type="submit">Signup</button>
+        <button type="submit" className='signbutton'>Signup</button></div>
       </form>
       <ToastContainer/>
+    </div>
     </div>
   );
 };
