@@ -7,6 +7,9 @@ import Login from './Login.jsx';
 import Signup from './Signup.jsx';
 import { login, signup } from './store/authSlice.js';
 import Transactions from './transcations/Transcation.jsx';
+import AuthLayout from './AuthLayout'
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import Forgot from './Forgot/Forgot.jsx';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -31,22 +34,18 @@ function App() {
     dispatch(signup());
   };
 
-  return !loading ? (
-    <div>
-      {isAuthenticated ? (
-        <>
-          <Sidebar />
-          <Dashboard />
-        </>
-      ) : (
-        <>
-          <Signup onSignupSuccess={handleSignupSuccess} />
-          <Login />
-        </>
-      )}
-    </div>
-  ) : null;
+ return(
+  <>
+  <BrowserRouter>
+    <Routes>
+  <Route path = "/" element = {<Login/>}/>
+  <Route path = "/Signup" element = {<Signup/>}/>
+  <Route path = "/Forgot" element = {<Forgot/>}/>
+  <Route path = "/Sidebar" element = {<Sidebar/>}/>
+    </Routes>
+  </BrowserRouter>
+</>
+);
 }
-
 export default App;
 

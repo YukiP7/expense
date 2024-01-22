@@ -4,10 +4,17 @@ import { faBars, faTimes, faChartLine, faCreditCard, faMoneyBillWave, faMoneyBil
 import './sidebar.css' ;
 import { useState , useEffect } from 'react';
 import authService from '../appwrite/authService';
+import Dashboard from '../Dashboard/Dashboard';
+import Transactions from '../transcations/Transcation';
+import Budget from '../Budget/Budget';
+import Expense from '../Expense/Expense';
+import { useNavigate } from 'react-router-dom';
 
-const Sidebar = () => {
+const Sidebar = ({}) => {
   const [userName, setUserName] = useState('');
   const [userBudget, setUserBudget] = useState(0);
+  const[type,setType] = useState('dashboard');
+  const navigate = useNavigate()
 
   useEffect(() => {
     // Fetch user data from AuthService
@@ -28,9 +35,11 @@ const Sidebar = () => {
 
   const handleLogout = () => {
      authService.logout();
+     navigate('/')
   }
 
   return (
+    <>
     <div className="sidebar">
       <div className="hamburger">
         <FontAwesomeIcon icon={faBars} />
@@ -49,29 +58,34 @@ const Sidebar = () => {
         <div className="options">
           <div className="opt-bar">
             <FontAwesomeIcon icon={faChartLine} />
-            <span>Dashboard</span>
+            <button className= {`button ${type==="dashboard"?'active':''}`} onClick={() => setType("dashboard")}>Dashboard</button>
           </div>
-          <div className="opt-bar">
+           <div className="opt-bar">
             <FontAwesomeIcon icon={faCreditCard} />
-            <span>Transactions</span>
+            <button className= {`button ${type==="transactions"?'active':''}`} onClick={() => setType("transactions")}>Transactions</button>
           </div>
-          <div className="opt-bar">
+         <div className="opt-bar">
             <FontAwesomeIcon icon={faMoneyBillWave} />
-            <span>Budget</span>
+            <button className= {`button ${type==="budget"?'active':''}`} onClick={() => setType("budget")}>Budget</button>
           </div>
           <div className="opt-bar">
             <FontAwesomeIcon icon={faMoneyBillAlt} />
-            <span>Expenses</span>
+            <button className= {`button ${type==="expense"?'active':''}`} onClick={() => setType("expense")}>Expense</button>
           </div>
 
           <div className="opt-bar">
             <FontAwesomeIcon icon={faChevronRight} />
-            <span onClick={handleLogout}>Sign out</span>
-          </div>
+       <button onClick={handleLogout}>Signout</button>
+          </div> 
         </div>
       </div>
-    </div>
-  );
+    </div> 
+      {type=== "dashboard" && (<div className='dashboard'><Dashboard/></div>)}
+      {type=== "transactions" && (<div className='transactions'><Transactions/></div>)}
+      {type=== "budget" && (<div className='budget'><Budget/></div>)}
+      {type=== "expense" && (<div className='expense'><Expense/></div>)}
+      </>
+    );
 };
 
 export default Sidebar;

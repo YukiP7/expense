@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import authService from './appwrite/authService';
 import './Login.css'
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const navigate = useNavigate()
 
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
       const response = await authService.createAccount({email, password, name});
       console.log('User registered successfully', response);
+      navigate('/')
       // Redirect or perform actions after successful registration
     } catch (error) {
       console.error('Registration failed', error);
