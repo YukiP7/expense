@@ -40,6 +40,7 @@ const Sidebar = ({}) => {
 
   return (
     <>
+    <div className="First">
     <div className="sidebar">
       <div className="hamburger">
         <FontAwesomeIcon icon={faBars} />
@@ -47,14 +48,11 @@ const Sidebar = ({}) => {
       <FontAwesomeIcon icon={faTimes} className="fa-2xl" id="cross" />
       <div className="profile">
         <div className="feature1">
-          <div className="circle"></div>
           <div className="detail">
-            <h2>{userName}</h2>
+            <h2> Welcome {userName} !</h2>
             <p id="money">Your Money: {userBudget}</p>
           </div>
         </div>
-
-
         <div className="options">
           <div className="opt-bar">
             <FontAwesomeIcon icon={faChartLine} />
@@ -84,6 +82,7 @@ const Sidebar = ({}) => {
       {type=== "transactions" && (<div className='transactions'><Transactions/></div>)}
       {type=== "budget" && (<div className='budget'><Budget/></div>)}
       {type=== "expense" && (<div className='expense'><Expense/></div>)}
+      </div>
       </>
     );
 };

@@ -5,15 +5,3 @@
     scroll-behavior: smooth;
     box-sizing: border-box;
 }
-
-body{
-    background-color: #615d60;
-    color: #7723c4;
-}
-
-body{
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 20px 20px 20px;
-    margin: 10px;
-}
