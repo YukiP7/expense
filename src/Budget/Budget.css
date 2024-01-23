@@ -1,0 +1,49 @@
+  
+  .total {
+    text-align: left;
+  }
+  
+  .totalBudget_amount {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  
+  #budget-amt {
+    font-size: 24px;
+    color: #3498db; 
+  }
+  
+  .budget-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .budget-button {
+    margin-bottom: 15px;
+    padding: 12px;
+    font-size: 16px;
+  }
+  
+  .budget-button {
+    cursor: pointer;
+    background-color: #3498db; 
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .budget-button:hover {
+    background-color: #2980b9; 
+  }
+
+  .budget-form input{
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 2rem;
+    width: 600px;
+  }
+  
+  

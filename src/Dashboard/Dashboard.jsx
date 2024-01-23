@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDollarSign } from '@fortawesome/free-solid-svg-icons';
 import dataService from '../appwrite/dataConfig.js';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Dashboard = () => {
   const [expenseName, setExpenseName] = useState('');
@@ -15,16 +18,25 @@ const Dashboard = () => {
 
   const handleAddBudget = async (e) => {
     e.preventDefault();
+    if (!budgetTitle.trim() || budget< 0) {
+      toast.error('Invalid input for Budget Name or Amount');
+      return;
+    }
     // Save budget to Appwrite
     await dataService.saveBudget({ budgetTitle, budget});
 
     setBudget((prevBudget) => prevBudget + budget);
     setBudgetTitle('') ;
     setBudget(0); // Clear the input field after adding the budget
+    toast.success('Budget added successfully');
   };
 
   const handleAddExpense = async (e) => {
     e.preventDefault();
+    if (!expenseName.trim() || expense < 0) {
+      toast.error('Invalid input for Expense Name or Amount');
+      return;
+    }
     const descrip = document.querySelector('#description').value;
     const wrngAns = document.querySelector('#wrng-ans');
     const ansList = document.querySelector('#ans');
@@ -45,6 +57,7 @@ const Dashboard = () => {
       // Reset form fields
       setExpenseName('') ;
       setExpense(0);
+      toast.success('Expense added successfully');
     }
   };
 
@@ -76,6 +89,7 @@ const Dashboard = () => {
 
   return (
     <div className="information">
+      <ToastContainer/>
       <div className="Transcations">
         <h1>All Transactions</h1>
         <form id="one">

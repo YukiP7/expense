@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import dataService from '../appwrite/dataConfig.js';
+import './Transcation.css'
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -16,16 +17,28 @@ const Transactions = () => {
   }, []);
 
   const handleSearch = () => {
-    if (Array.isArray(transactions)) {
-      const filtered = transactions.filter(
-        (transaction) => transaction.date === searchDate
-      );
+     if (Array.isArray(transactions)) {
+      const formattedSearchDate = new Date(searchDate);
+  
+      const filtered = transactions.filter((transaction) => {
+        const transactionDate = new Date(transaction.date);
+  
+        // Compare the year, month, and day of the two dates
+        return (
+          formattedSearchDate.getFullYear() === transactionDate.getFullYear() &&
+          formattedSearchDate.getMonth() === transactionDate.getMonth() &&
+          formattedSearchDate.getDate() === transactionDate.getDate()
+        );
+      });
+  
       setFilteredTransactions(filtered);
     }
   };
-
+  
+  
+  
   return (
-    <div>
+      <div class = 'info' >
       <h1>All Transactions</h1>
 
       <div>
@@ -36,7 +49,7 @@ const Transactions = () => {
           value={searchDate}
           onChange={(e) => setSearchDate(e.target.value)}
         />
-        <button onClick={handleSearch}>Search</button>
+        <button className='transaction-button' onClick={handleSearch}>Search</button>
       </div>
 
       <table>
