@@ -75,10 +75,9 @@ const Dashboard = () => {
   
 
   return (
-    <div className="info">
+    <div className="information">
       <div className="Transcations">
         <h1>All Transactions</h1>
-
         <form id="one">
           <input
             type="text"

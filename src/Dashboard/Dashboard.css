@@ -1,30 +1,9 @@
-.info{
-    display: flex;
-}
-.Transcations{
-    width: 50%;
-}
+/* 
 
-.expense_Tracker{
-    width: 50%;
-
-}
 .expense_Tracker h2{
     margin-top: 50px;
     font-weight: bolder;
     text-align: center;
-}
-
-h1{
-    font-family:  'Nunito', 'sans-serif';
-}
-
-.foot-panel{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin-top: 100px;
-    justify-content:center ;
 }
 
 .div{
@@ -39,43 +18,6 @@ h1{
     color: #000;
 }
 
-
-.foot-panel p{
-    margin-bottom: 15px;
-}
-.foot-panel i{
-    color: #000;
-}
-
-form {
-    margin-top: 50px;
-    margin-left: 50px;
-    display: flex;
-    flex-direction: column;
-     justify-content: center;
-    /* align-items: center;  */
-  }
-
-  input {
-    margin: 10px;
-    height: 25px;
-    width: 80% ;
-    font-size: larger;
-  }
-  
-  button {
-    text-align: center;
-    padding: 5px;
-    width: 140px;
-    border: 2px solid #000;
-    border-radius: 8px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: bold;
-    margin: 10px;
-    font-size: 1rem;
-  }
-
   #results {
     height: 20px;
     width: auto;
@@ -87,32 +29,21 @@ form {
     #ans {
     margin-top: 5px;
     list-style: none;
-    color: #000;
+    color: #000; */
     /* text-align: center; */
-  }
-
+  
+/* 
   #ans li{
     height: 25px;
     /* width: 75%; */
-    margin-top: 5px;
+    /* margin-top: 5px;
     border: 2px solid #fff;
     border-radius: 5px;
     padding: 2px;
     background-color: #fff;
   }
-  #expense{
-    font-size: larger;
+  #expense{ */
+    /* font-size: larger;
   }
-
-  .total_amount{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.3rem ;
-}
-
-.total_amount i{
-    margin-top: 11px;
-}
 
 
