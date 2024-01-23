@@ -51,7 +51,7 @@ const Transactions = () => {
           {Array.isArray(filteredTransactions) && filteredTransactions.length > 0
             ? filteredTransactions.map((transaction) => (
                 <tr key={transaction.$id}>
-                  <td>{transaction.title}</td>
+                  <td>{transaction.Title}</td>
                   <td>{transaction.price}</td>
                   <td>{transaction.date}</td>
                 </tr>
@@ -59,7 +59,7 @@ const Transactions = () => {
             : Array.isArray(transactions) &&
               transactions.map((transaction) => (
                 <tr key={transaction.$id}>
-                  <td>{transaction.title}</td>
+                  <td>{transaction.Title}</td>
                   <td>{transaction.price}</td>
                   <td>{(transaction.date)}</td>
                 </tr>

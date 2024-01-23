@@ -21,7 +21,7 @@ const Login = () => {
     }
   };
   if(isLoggedIn){
-      setTimeout(() => navigate('/Sidebar'), 2000); // adjust delay as needed
+      setTimeout(() => navigate('/Sidebar'), 1000); // adjust delay as needed
   }
 
   return (
