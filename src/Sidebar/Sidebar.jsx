@@ -20,10 +20,10 @@ const Sidebar = ({}) => {
     // Fetch user data from AuthService
     const fetchUserData = async () => {
       try {
-        const currentUser = await authService.getCurrentUser();
 
-        // Update state with fetched user data
+        const currentUser = await authService.getCurrentUser();
         setUserName(currentUser.name);
+
       } catch (error) {
         console.error(error.message);
       }
@@ -31,9 +31,8 @@ const Sidebar = ({}) => {
 
     fetchUserData();
 
-    // Event listener to check for window resize
     const handleResize = () => {
-      setIsMobileView(window.innerWidth <= 768); // Adjust the breakpoint as needed
+      setIsMobileView(window.innerWidth <= 768); 
     };
 
     window.addEventListener('resize', handleResize);

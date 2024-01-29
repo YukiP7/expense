@@ -10,7 +10,7 @@ const Transactions = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       const data = await dataService.getTranscations();
-      setTransactions(data.documents || []); // Ensure transactions is an array
+      setTransactions(data);
     };
 
     fetchTransactions();
@@ -38,7 +38,7 @@ const Transactions = () => {
   
   
   return (
-      <div class = 'info' >
+      <div className = 'info' >
       <h1>All Transactions</h1>
 
       <div>
@@ -72,9 +72,9 @@ const Transactions = () => {
             : Array.isArray(transactions) &&
               transactions.map((transaction) => (
                 <tr key={transaction.$id}>
-                  <td>{transaction.Title}</td>
-                  <td>{transaction.price}</td>
-                  <td>{(transaction.date)}</td>
+                  <td>{transaction.Title ==null ? transaction.budgetTitle : transaction.Title}</td>
+                  <td>{transaction.price == null ? transaction.budget : transaction.price}</td>
+                  <td>{transaction.date == null ? "--" : transaction.date}</td>
                 </tr>
               ))}
         </tbody>

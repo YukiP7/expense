@@ -23,10 +23,7 @@ const Budget = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await dataService.getTranscations();
-  
-        // Check if the 'documents' property exists and is an array
-        const transactions = response.documents || [];
+        const transactions = await dataService.getTranscations();
   
         // Calculate total budget
         const newTotalBudget = transactions.reduce((acc, transaction) => acc + transaction.budget, 0);

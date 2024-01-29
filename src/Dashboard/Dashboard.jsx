@@ -10,11 +10,11 @@ const Dashboard = () => {
   const [expenseName, setExpenseName] = useState('');
   const [expense, setExpense] = useState(0);
   const [expenseDate, setExpenseDate] = useState('');
-  const [expenseId, setExpenseId] = useState('');
   const [budgetTitle, setBudgetTitle] = useState('');
   const [budget, setBudget] = useState(0);
   const [totalBudget, setTotalBudget] = useState(0);
   const [totalExpense, setTotalExpense] = useState(0);
+  const [transactions, setTransactions] = useState([]);
 
   const handleAddBudget = async (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const Dashboard = () => {
 
     setBudget((prevBudget) => prevBudget + budget);
     setBudgetTitle('') ;
-    setBudget(0); // Clear the input field after adding the budget
+    setBudget(0); 
     toast.success('Budget added successfully');
   };
 
@@ -47,7 +47,7 @@ const Dashboard = () => {
       wrngAns.innerHTML = '';
 
       // Save expense to Appwrite
-      await dataService.saveExpense({ expenseName, expense, expenseDate, expenseId });
+      await dataService.saveExpense({ expenseName, expense, expenseDate });
 
       // Update Expense List
       const expenseItem = document.createElement('li');
@@ -65,10 +65,9 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await dataService.getTranscations();
-  
-        // Check if the 'documents' property exists and is an array
-        const transactions = response.documents || [];
+        const transactions = await dataService.getTranscations();
+        setTransactions(transactions) ;
+        console.log(transactions) ;
   
         // Calculate total budget
         const newTotalBudget = transactions.reduce((acc, transaction) => acc + transaction.budget, 0);
@@ -150,7 +149,6 @@ const Dashboard = () => {
             <label>Amount</label>
             <input
               type="number"
-              id={(Math.random() * 100) + 1}
               value={expense}
               onChange={(e) => setExpense(e.target.value)}
             />
@@ -172,7 +170,13 @@ const Dashboard = () => {
             <div id="results">
               <div id="wrng-ans"></div>
               <h3>Expense List</h3>
-              <ul id="ans"></ul>
+              <ul id="ans">
+              {transactions.map((transaction) => (
+              <li key={transaction.$id}>
+                {transaction.Title} <span>{transaction.price}</span>
+              </li>
+            ))}
+              </ul>
             </div>
           </form>
         </div>

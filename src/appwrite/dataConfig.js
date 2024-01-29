@@ -1,5 +1,5 @@
 import conf from '../conf/conf.js'
-import {Client , Databases , ID } from "appwrite" 
+import {Client , Databases , ID , Query } from "appwrite" 
 
 export class DataService{
     client = new Client() ;
@@ -13,26 +13,63 @@ export class DataService{
             this.databases = new Databases(this.client);
     }
 
-    async saveExpense({expenseName , expense , expenseDate , expenseId}){
+    async saveExpense({ expenseName, expense, expenseDate }) {
         try {
-           return await this.databases.createDocument(
-            conf.appwriteDatabaseId ,
-            conf.appwriteCollectionId ,
-            ID.unique() ,
-            {
-                Title: expenseName,  
-                price: expense,
-                date: expenseDate,
-                expenseId 
+            const userId = localStorage.getItem('userId');
+            console.log(userId) ;
+
+            if (!userId) {
+                throw new Error("User not authenticated");
             }
-           )
+
+            const data = {
+                userId,
+                Title : expenseName,
+                price : expense,
+                date : expenseDate
+            };
+
+            return await this.databases.createDocument(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                ID.unique(),
+                data
+            );
         } catch (error) {
-            console.log("APPWRITE SERVICE :: SAVE EXPENSE :: ERROR : " , error);
+            console.log("DataService :: saveExpense :: error: ", error);
+            throw error;
         }
     }
 
+    async getTranscations() {
+        try {
+            const userId = localStorage.getItem('userId');
+            console.log(userId) ;
+
+            if (!userId) {
+                throw new Error("User not authenticated");
+            }
+
+            const response = await this.databases.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                [
+                  Query.limit(100),
+                  Query.equal("userId",[userId]),
+                ],
+            );
+            return response.documents;
+        } catch (error) {
+            console.log("DataService :: getExpenses :: error: ", error);
+            throw error;
+        }
+    }
+
+
     async saveBudget({budgetTitle , budget}){
         try {
+            const userId = localStorage.getItem('userId');
+            console.log(userId) ;
             console.log('Budget Title:', budgetTitle);
             console.log('Budget:', budget);
 
@@ -41,6 +78,7 @@ export class DataService{
                 conf.appwriteCollectionId ,
                 ID.unique() ,
                 {
+                    userId ,
                     budgetTitle , 
                     budget ,
                 }
@@ -50,46 +88,8 @@ export class DataService{
         }
     }
 
-    async getTranscations(){
-        try {
-            return await this.databases.listDocuments(
-                conf.appwriteDatabaseId ,
-                conf.appwriteCollectionId
-            )
-        } catch (error) {
-            console.log("Appwrite service :: getTranscations :: error" , error);
-        }
-    }
-
-    async updateExpense({expenseName , expense , expenseDate , expenseId}){
-        try {
-            return await this.databases.updateDocument(
-                conf.appwriteDatabaseId ,
-                conf.appwriteCollectionId ,
-                expenseId , 
-                {
-                    Title: expenseName,  
-                    price: expense,
-                    date: expenseDate,
-                    expenseId 
-                }
-            )
-        } catch (error) {
-            console.log("Appwrite service :: updateExpense :: error :" , error);
-        }
-    }
-
-    async deleteExpense(expenseId){
-        try {
-            return await this.databases.deleteDocument(
-                conf.appwriteDatabaseId , 
-                conf.appwriteCollectionId ,
-                expenseId 
-            )
-        } catch (error) {
-            console.log("Appwrite service :: updateExpense :: error :" , error);
-        }
-    }
+     
+    
 } 
 const dataService = new DataService() ;
 
