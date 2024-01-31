@@ -6,7 +6,6 @@ import authService from '../appwrite/authService';
 import Dashboard from '../Dashboard/Dashboard';
 import Transactions from '../transcations/Transcation';
 import Budget from '../Budget/Budget';
-import Expense from '../Expense/Expense';
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({}) => {
@@ -83,10 +82,6 @@ const Sidebar = ({}) => {
                 <button className={`button ${type === 'budget' ? 'active' : ''}`} onClick={() => setType('budget')}>Budget</button>
               </div>
               <div className="opt-bar">
-                <FontAwesomeIcon icon={faMoneyBillAlt} />
-                <button className={`button ${type === 'expense' ? 'active' : ''}`} onClick={() => setType('expense')}>Expense</button>
-              </div>
-              <div className="opt-bar">
                 <FontAwesomeIcon icon={faChevronRight} />
                 <button onClick={handleLogout}>Signout</button>
               </div>
@@ -96,7 +91,6 @@ const Sidebar = ({}) => {
         {type === 'dashboard' && !isMobileView && <div className="dashboard"><Dashboard /></div>}
         {type === 'transactions' && !isMobileView && <div className="transactions"><Transactions /></div>}
         {type === 'budget' && !isMobileView && <div className="budget"><Budget /></div>}
-        {type === 'expense' && !isMobileView && <div className="expense"><Expense /></div>}
       </div>
 
         {/* Display other content when the sidebar is closed */}
@@ -105,7 +99,6 @@ const Sidebar = ({}) => {
           {type === 'dashboard' && isMobileView && <Dashboard />}
           {type === 'transactions' && isMobileView && <Transactions />}
           {type === 'budget' && isMobileView && <Budget />}
-          {type === 'expense' && isMobileView && <Expense />}
         </div>
       )}
     </>
